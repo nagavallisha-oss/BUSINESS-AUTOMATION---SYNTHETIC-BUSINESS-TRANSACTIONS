@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NPJ VORTEX | Synthetic Business Transactions</title>
+<style>
+:root{--bg:#07101e;--panel:#101f35;--panel2:#132945;--line:#284563;--text:#eef6ff;--muted:#a8bdd4;--cyan:#38d8f2;--blue:#4289ff;--green:#39d6a0;--red:#ff7184;--amber:#ffd27a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0,#173b66 0,#07101e 43%,#050a12 100%);font:14px Arial,Helvetica,sans-serif;color:var(--text)}
+.wrap{max-width:1180px;margin:auto;padding:24px 18px 40px}.header{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}.eyebrow{font-size:11px;font-weight:bold;letter-spacing:2px;color:var(--cyan)}h1{font-size:clamp(26px,4vw,39px);margin:8px 0}h2{font-size:17px;margin:0 0 7px}h3{font-size:21px;margin:10px 0}.sub{color:var(--muted);line-height:1.5;margin:0;max-width:760px}.tag{border:1px solid #28617d;background:#0d2940;border-radius:999px;padding:9px 13px;color:#8deeff;font-size:12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:23px 0}.stat,.card{background:linear-gradient(145deg,rgba(19,41,69,.97),rgba(10,24,42,.98));border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 30px #0002}.stat{padding:15px}.stat span{display:block;font-size:11px;color:var(--muted);margin-bottom:9px}.stat strong{font-size:25px}.stat small{display:block;color:var(--muted);margin-top:5px;font-size:11px}
+.grid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:16px}.card{padding:20px}.hint{color:var(--muted);font-size:12px;line-height:1.5;margin:0 0 16px}
+label{display:block;font-size:12px;color:#d9e8fa;font-weight:bold;margin:12px 0 6px}input,select,textarea{width:100%;padding:11px;border:1px solid #365575;background:#07172a;color:var(--text);border-radius:9px;font:inherit;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #38d8f222}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.check{display:flex;gap:9px;align-items:center;font-weight:normal;margin:11px 0}.check input{width:auto;accent-color:var(--cyan)}.btns{display:flex;gap:9px;flex-wrap:wrap;margin-top:17px}button{border:0;border-radius:9px;padding:12px 15px;font-weight:bold;cursor:pointer}.primary{background:linear-gradient(90deg,#20c7eb,#4389ff);color:#061426}.secondary{background:#1b3552;color:#e0efff;border:1px solid #355575}.primary:hover,.secondary:hover{filter:brightness(1.12)}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:15px 0 18px}.flowstep{background:#0a1a2d;border:1px solid var(--line);padding:10px 5px;border-radius:10px;text-align:center;color:var(--muted);font-size:10px}.flowstep b{display:block;color:var(--cyan);font-size:11px;margin-bottom:5px}.flowstep.active{border-color:var(--cyan);background:#10304a}
+.badge{display:inline-block;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:bold;background:#173b31;color:#79f0bc}.badge.fail{background:#48222d;color:#ff9cab}.badge.warn{background:#46371d;color:#ffdb8d}.placeholder{min-height:250px;display:grid;place-items:center;text-align:center;color:var(--muted);line-height:1.6}.report{display:none}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:15px 0}.metric{padding:11px;background:#08182b;border:1px solid var(--line);border-radius:10px;min-width:0}.metric small{display:block;color:var(--muted);font-size:10px;margin-bottom:7px}.metric strong{font-size:13px;overflow-wrap:anywhere}.section{margin-top:16px}.section h4{color:var(--cyan);letter-spacing:.8px;font-size:11px;margin:0 0 8px}.section p,.section li{font-size:12px;line-height:1.55;color:#d8e7f8}.section ul{padding-left:18px;margin:7px 0}.code{font:11px ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere;background:#071321;padding:11px;border-radius:9px;color:#c2eaff;line-height:1.55}.timeline{display:grid;gap:7px}.event{display:flex;gap:9px;align-items:flex-start;background:#091a2c;border:1px solid #294561;border-radius:9px;padding:10px;font-size:12px}.num{display:grid;place-items:center;flex:none;width:22px;height:22px;border-radius:50%;background:#173d5b;color:var(--cyan);font-weight:bold}.foot{text-align:center;color:#8198b5;font-size:11px;margin-top:20px}
+@media(max-width:800px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.row{grid-template-columns:1fr}.card{padding:16px}.flow{gap:4px}.flowstep{font-size:9px;padding:8px 2px}}
+</style></head>
+<body><main class="wrap">
+<header class="header"><div><div class="eyebrow">NPJ VORTEX · HACKATHON MVP</div><h1>Synthetic Business Transactions</h1><p class="sub">Monitor a complete test journey, validate business outcomes, collect evidence and recommend a safe response — not just check whether a server is up.</p></div><span class="tag">DEMO MODE · NO REAL PAYMENTS</span></header>
+<section class="stats">
+<div class="stat"><span>SUCCESS RATE</span><strong id="successRate">—</strong><small>Based on demo runs</small></div>
+<div class="stat"><span>FAILED RUNS</span><strong id="failedRuns">0</strong><small>Current session</small></div>
+<div class="stat"><span>LAST LATENCY</span><strong id="lastLatency">—</strong><small>Configured test run</small></div>
+<div class="stat"><span>OPEN INCIDENTS</span><strong id="incidents">0</strong><small>Failures needing review</small></div>
+</section>
+<div class="grid">
+<section class="card"><h2>01 / Configure a synthetic journey</h2><p class="hint">Choose a sample case or change the form fields to simulate a test. The prototype uses local rules and does not contact a real store or payment gateway.</p>
+<form id="form">
+<label for="scenario">Demo scenario</label><select id="scenario"><option value="missing">Payment approved, order record missing</option><option value="success">Successful checkout</option><option value="http">Unexpected API status</option><option value="slow">Latency above threshold</option><option value="data">Incorrect SKU / amount</option><option value="repeat">Repeated service failure</option><option value="custom">Custom test</option></select>
+<div class="row"><div><label for="txn">Synthetic transaction ID</label><input id="txn" value="SYN-TXN-1001" required></div><div><label for="corr">Correlation ID</label><input id="corr" value="CORR-8A21" required></div></div>
+<label for="journey">Journey type</label><select id="journey"><option>Checkout</option><option>Login</option><option>Booking</option><option>Registration</option><option>Refund</option><option>API-to-API integration</option></select>
+<div class="row"><div><label for="expected">Expected HTTP status</label><select id="expected"><option>200</option><option>201</option><option>204</option></select></div><div><label for="actual">Actual HTTP status</label><select id="actual"><option>200</option><option>201</option><option>204</option><option>400</option><option>401</option><option>403</option><option>404</option><option>429</option><option>500</option><option>502</option><option>503</option><option>504</option></select></div></div>
+<div class="row"><div><label for="business">Business data validation</label><select id="business"><option value="correct">Correct SKU / amount</option><option value="wrong">Incorrect SKU / amount</option><option value="error">Business operation error</option></select></div><div><label for="latency">Observed latency (seconds)</label><input id="latency" type="number" min="0" step=".1" value="2.1" required></div></div>
+<div class="row"><div><label for="threshold">Latency threshold (seconds)</label><input id="threshold" type="number" min=".1" step=".1" value="3" required></div><div><label for="owner">Owning team</label><select id="owner"><option>Order Service Team</option><option>Payments Team</option><option>Identity / Login Team</option><option>Platform / API Team</option><option>Integrations Team</option></select></div></div>
+<label class="check"><input type="checkbox" id="order" > Order / downstream record exists</label><label class="check"><input type="checkbox" id="confirm"> Confirmation is visible</label><label class="check"><input type="checkbox" id="repeat"> Failure repeats across runs or regions</label>
+<label for="logs">Log / trace evidence (optional)</label><textarea id="logs" rows="3">Payment API returned 200; order record did not appear within 10 seconds.</textarea>
+<div class="btns"><button class="primary" type="submit">Run journey & analyze →</button><button class="secondary" type="button" id="reset">Reset</button></div>
+</form></section>
+<section class="card"><h2>02 / Live run & diagnosis</h2><p class="hint">Five stages from the project architecture: trigger, execute, validate, diagnose and respond.</p>
+<div class="flow"><div class="flowstep" id="f1"><b>01</b>TRIGGER</div><div class="flowstep" id="f2"><b>02</b>EXECUTE</div><div class="flowstep" id="f3"><b>03</b>VALIDATE</div><div class="flowstep" id="f4"><b>04</b>DIAGNOSE</div><div class="flowstep" id="f5"><b>05</b>RESPOND</div></div>
+<div id="empty" class="placeholder">Fill the form and select<br><b>Run journey & analyze</b><br>to generate the diagnostic report.</div>
+<div id="report" class="report"><span id="badge" class="badge fail">FAIL — INVESTIGATE</span><h3 id="headline">Diagnosis ready</h3><p class="hint" id="summary"></p>
+<div class="metrics"><div class="metric"><small>TRANSACTION</small><strong id="oTxn">—</strong></div><div class="metric"><small>LATENCY</small><strong id="oLatency">—</strong></div><div class="metric"><small>CONFIDENCE</small><strong id="oConfidence">—</strong></div></div>
+<div class="section"><h4>EXPECTED VS ACTUAL</h4><div id="compare" class="code"></div></div>
+<div class="section"><h4>DETECTION SIGNALS</h4><ul id="signals"></ul></div>
+<div class="section"><h4>LIKELY DIAGNOSIS</h4><p id="diagnosis"></p></div>
+<div class="section"><h4>RECOMMENDED RUNBOOK</h4><ul id="actions"></ul></div>
+<div class="section"><h4>EVIDENCE BUNDLE</h4><div id="evidence" class="code"></div></div>
+<div class="section"><h4>SAFE RESPONSE POLICY</h4><p id="response"></p></div>
+<div class="section"><h4>RUN TIMELINE</h4><div class="timeline" id="timeline"></div></div>
+<div class="btns"><button type="button" class="secondary" id="download">Download report (.txt)</button><button type="button" class="secondary" id="copy">Copy report</button></div>
+</div></section></div>
+<p class="foot">Prototype concept for NPJ VORTEX · Synthetic test data only · Diagnosis is rule-based and illustrative, not a confirmed root cause.</p>
+</main>
+<script>
+const $=id=>document.getElementById(id);let historyRuns=[],reportText='';
+const presets={
+missing:{expected:'200',actual:'200',business:'correct',latency:'2.1',threshold:'3',order:false,confirm:false,repeat:false,logs:'Payment API returned 200; order record did not appear within 10 seconds.'},
+success:{expected:'200',actual:'200',business:'correct',latency:'1.2',threshold:'3',order:true,confirm:true,repeat:false,logs:'Checkout completed; order record persisted and confirmation was visible.'},
+http:{expected:'200',actual:'500',business:'error',latency:'1.0',threshold:'3',order:false,confirm:false,repeat:false,logs:'POST /payment returned 500 Internal Server Error.'},
+slow:{expected:'200',actual:'200',business:'correct',latency:'8.4',threshold:'3',order:true,confirm:true,repeat:false,logs:'Request completed but exceeded the latency threshold.'},
+data:{expected:'200',actual:'200',business:'wrong',latency:'1.8',threshold:'3',order:true,confirm:true,repeat:false,logs:'Order created with a mismatched amount or SKU.'},
+repeat:{expected:'200',actual:'503',business:'error',latency:'4.5',threshold:'3',order:false,confirm:false,repeat:true,logs:'503 Service Unavailable occurred repeatedly across test runs.'}
+};
+function applyScenario(k){let p=presets[k];if(!p)return;for(let id of ['expected','actual','business','latency','threshold','logs'])$(id).value=p[id];for(let id of ['order','confirm','repeat'])$(id).checked=p[id];}
+$('scenario').addEventListener('change',e=>applyScenario(e.target.value));
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+$('form').addEventListener('submit',e=>{e.preventDefault();
+const txn=$('txn').value.trim()||'Not provided',corr=$('corr').value.trim()||'Not provided',journey=$('journey').value,owner=$('owner').value;
+const expected=+$('expected').value,actual=+$('actual').value,bd=$('business').value,lat=+$('latency').value,threshold=+$('threshold').value,order=$('order').checked,confirm=$('confirm').checked,repeat=$('repeat').checked,logs=$('logs').value.trim()||'No log evidence supplied.';
+const signals=[],actions=[];
+if(actual!==expected)signals.push(`HTTP status mismatch: expected ${expected}, received ${actual}.`);
+if(bd!=='correct')signals.push(bd==='wrong'?'Business data mismatch: SKU or amount is incorrect.':'Business operation returned an error.');
+if(!order)signals.push('Order / downstream record is missing.');
+if(!confirm)signals.push('Customer confirmation is missing.');
+if(lat>threshold)signals.push(`Latency breach: ${lat.toFixed(1)}s exceeds ${threshold.toFixed(1)}s.`);
+if(repeat)signals.push('Failure repeats across runs or regions.');
+const pass=signals.length===0;let diagnosis,confidence;
+if(pass){diagnosis='All configured checks passed. The synthetic journey meets its expected HTTP status, business data, persistence, confirmation and latency requirements.';confidence='High';actions.push('Keep this run as a healthy baseline.','Continue scheduled monitoring and compare future latency trends.');}
+else{
+let causes=[];if(actual!==expected)causes.push(actual>=500?'server-side error or unavailable dependency':actual===429?'rate limiting':'API contract, request, or authorization mismatch');if(bd==='wrong')causes.push('business logic or data mapping mismatch');if(bd==='error')causes.push('business operation rejected or failed');if(!order)causes.push('order persistence failure, delay, or asynchronous processing lag');if(!confirm)causes.push('confirmation generation or delivery issue');if(lat>threshold)causes.push('slow dependency, network delay, or service overload');if(repeat)causes.push('persistent service/environment issue rather than one-off failure');
+diagnosis='Possible cause: '+[...new Set(causes)].join('; ')+'. This is a rule-based hypothesis from the entered evidence, not a confirmed root cause.';confidence=(signals.length>=3||repeat)?'High signal':'Medium';
+if(actual!==expected)actions.push('Inspect API response body and server logs; verify endpoint, request payload and dependency health.');
+if(!order)actions.push('Check order-service logs, database write result and queue/consumer lag; confirm whether the order appears after the expected window.');
+if(bd==='wrong')actions.push('Compare SKU, quantity, currency and amount across request, response and stored record.');
+if(!confirm)actions.push('Check the confirmation event, queue and notification service.');
+if(lat>threshold)actions.push('Inspect traces for the slowest dependency and compare latency against the SLO.');
+if(repeat)actions.push('Group failures by region, release version and dependency; escalate to the owning team.');
+actions.push('Attach the correlation ID and log evidence to the incident. Use sandbox/test accounts for transaction checks.');
+}
+const now=new Date().toLocaleString();$('empty').style.display='none';$('report').style.display='block';$('badge').className='badge'+(pass?'':' fail');$('badge').textContent=pass?'PASS':'FAIL — INVESTIGATE';$('headline').textContent=pass?'Journey checks passed':'Failure detected — diagnosis ready';$('summary').textContent=pass?'All checks passed for this demo run.':`${signals.length} detection signal(s) found for ${journey}. Review the evidence and recommended next steps.`;
+$('oTxn').textContent=txn;$('oLatency').textContent=`${lat.toFixed(1)}s / ${threshold.toFixed(1)}s`;$('oConfidence').textContent=confidence;
+$('compare').textContent=`Journey: ${journey}\nHTTP status: expected ${expected} | actual ${actual}\nBusiness data: ${bd}\nOrder record: ${order?'present':'missing'}\nConfirmation: ${confirm?'visible':'missing'}\nLatency: ${lat.toFixed(1)}s | threshold: ${threshold.toFixed(1)}s`;
+$('signals').innerHTML=(signals.length?signals:['No detection signals found.']).map(s=>`<li>${esc(s)}</li>`).join('');$('diagnosis').textContent=diagnosis;$('actions').innerHTML=actions.map(a=>`<li>${esc(a)}</li>`).join('');$('evidence').textContent=`Timestamp: ${now}\nTransaction ID: ${txn}\nCorrelation ID: ${corr}\nOwning team: ${owner}\nLog / trace excerpt: ${logs}`;
+const flow=[['Trigger','Manual demo run started'],['Execute',`${journey} test inputs processed`],['Validate',pass?'All configured assertions passed':`${signals.length} validation rule(s) failed`],['Diagnose','Evidence and probable-cause rules applied'],['Respond',pass?'No incident needed':'Runbook suggested; risky recovery requires human approval']];
+$('timeline').innerHTML=flow.map((x,i)=>`<div class="event"><span class="num">${i+1}</span><div><b>${x[0]}</b><br><span style="color:#a8bdd4">${esc(x[1])}</span></div></div>`).join('');
+for(let i=1;i<=5;i++)$('f'+i).classList.add('active');
+historyRuns.push({pass,lat});let fails=historyRuns.filter(r=>!r.pass).length;$('failedRuns').textContent=fails;$('incidents').textContent=fails;$('successRate').textContent=(historyRuns.length?((historyRuns.length-fails)/historyRuns.length*100).toFixed(1):'—')+(historyRuns.length?'%':'');$('lastLatency').textContent=lat.toFixed(1)+' s';
+reportText=`NPJ VORTEX — SYNTHETIC BUSINESS TRANSACTION REPORT\nStatus: ${pass?'PASS':'FAIL — INVESTIGATE'}\nJourney: ${journey}\nTransaction ID: ${txn}\nCorrelation ID: ${corr}\nTimestamp: ${now}\nOwning team: ${owner}\nExpected HTTP status: ${expected}; Actual: ${actual}\nBusiness data: ${bd}\nOrder record: ${order?'present':'missing'}; Confirmation: ${confirm?'visible':'missing'}\nLatency: ${lat}s; Threshold: ${threshold}s\nDetection signals:\n- ${signals.join('\n- ')||'None'}\nDiagnosis: ${diagnosis}\nRecommended next steps:\n- ${actions.join('\n- ')}\nEvidence: ${logs}\nSafety: Prototype uses entered sample data only. No real payment or recovery action is performed.`;
+});
+$('reset').addEventListener('click',()=>{$('form').reset();$('scenario').value='missing';applyScenario('missing');$('txn').value='SYN-TXN-1001';$('corr').value='CORR-8A21';$('empty').style.display='grid';$('report').style.display='none';for(let i=1;i<=5;i++)$('f'+i).classList.remove('active');});
+$('download').addEventListener('click',()=>{if(!reportText)return;let blob=new Blob([reportText],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='NPJ-VORTEX-diagnostic-report.txt';a.click();URL.revokeObjectURL(url);});
+$('copy').addEventListener('click',async()=>{if(!reportText)return;try{await navigator.clipboard.writeText(reportText);$('copy').textContent='Copied ✓';}catch(e){alert('Clipboard unavailable. Please use Download report.');}});
+applyScenario('missing');
+</script></body></html>
